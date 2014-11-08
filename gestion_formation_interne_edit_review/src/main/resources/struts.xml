@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+    <constant name="struts.enable.DynamicMethodInvocation" value="false"/>
+    <constant name="struts.devMode" value="true"/>
+    <constant name="struts.custom.i18n.resources" value="global" /> 
+    <constant name="struts.action.extension" value="," />
+	<constant name="struts.ui.theme" value="simple" />
+	
+	<package name="sqli_basic_package" extends="struts-default">
+		<interceptors>	
+			<!-- Custom interceptors -->
+			<interceptor name="sqliRoleValidatorInterceptor" class="com.sqli.echallenge.formation.web.interceptor.SqliRoleValidatorInterceptor"></interceptor>
+			<interceptor name="sqliSessionValidatorInterceptor" class="com.sqli.echallenge.formation.web.interceptor.SqliSessionValidatorInterceptor"></interceptor>
+			<interceptor name="annotationInterceptor" class="com.opensymphony.xwork2.interceptor.annotations.AnnotationWorkflowInterceptor"/>
+			
+			<!-- Custom stacks -->
+			<interceptor-stack name="sqliSessionValidatorStack">
+				<interceptor-ref name="sqliSessionValidatorInterceptor" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- <global-results >
+			<result name="valid_session" type="redirectAction">
+				<param name="actionName">index</param>
+                <param name="namespace">/</param>
+			</result>
+		</global-results> -->
+	</package>
+	
+    <package name="default" namespace="/" extends="sqli_basic_package">
+    	<default-action-ref name="index" />
+    	
+    	<!-- Redirect User to the appropriate index page -->
+    	<action name="index" class="com.sqli.echallenge.formation.web.IndexAction">
+    		<result name="index_administrateur">/pages/administrateur/index.jsp</result>
+    		<result name="index_respo_formation">/pages/respo_formation/index.jsp</result>
+    		<result name="index_formateur">/pages/formateur/index.jsp</result>
+    		<result name="login" type="redirectAction">login</result>
+    	</action>
+    	
+    	<!-- If user already connected redirect to index | else to login -->
+    	<action name="login" class="com.sqli.echallenge.formation.web.LoginAction">
+    		<interceptor-ref name="sqliSessionValidatorStack" />
+    		<result name="success" type="redirectAction">index</result>
+    		<result name="input">/pages/login.jsp</result>
+    	</action>
+    	
+    	<!-- Destroy Session and redirect to login -->
+    	<action name="logout" class="com.sqli.echallenge.formation.web.LogoutAction">
+    		<result name="success" type="redirectAction">login</result>
+    	</action>
+    
+    	<action name="test" class="com.sqli.echallenge.formation.web.TestAction">
+    		<result name="success">/pages/test.jsp</result>
+    	</action>
+    </package>
+    
+    <package name="administrateur" namespace="/administrateur" extends="sqli_basic_package">
+    	<default-action-ref name="listCollaborateurs" />
+    	
+    	<!-- Gestion Collaborateur -->
+    	<action name="listCollaborateurs" class="com.sqli.echallenge.formation.web.admin.CollaborateurListAction">
+    		<result name="success">/pages/administrateur/collaborateur_list.jsp</result>
+    		<result name="input">/pages/administrateur/collaborateur_list.jsp</result>
+    		<result name="error">/pages/administrateur/collaborateur_list.jsp</result>
+    	</action>
+    	
+    	<action name="deleteCollaborateur" class="com.sqli.echallenge.formation.web.admin.CollaborateurDeleteAction">
+    		<result name="success" type="redirectAction">listCollaborateurs</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	
+    	<action name="updateCollaborateur" class="com.sqli.echallenge.formation.web.admin.CollaborateurUpdateAction">
+    		<result name="success" type="redirectAction">listCollaborateurs</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	
+    	<action name="addCollaborateur" class="com.sqli.echallenge.formation.web.admin.CollaborateurAddAction">
+    		<result name="success" type="redirectAction">listCollaborateurs</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	
+    	<action name="sendEmailToCollaborateur" class="com.sqli.echallenge.formation.web.admin.CollaborateurSendEmailAction">
+    		<result name="success" type="redirectAction">listCollaborateurs</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	<!-- End GEstion Collaborateur -->
+    	
+    	<!-- Gestion Habilitation -->
+    	<action name="listHabilitations" class="com.sqli.echallenge.formation.web.admin.HabilitationListAction">
+    		<result name="success">/pages/administrateur/habilitation_list.jsp</result>
+    		<result name="input">/pages/administrateur/habilitation_list.jsp</result>
+    		<result name="error">/pages/administrateur/habilitation_list.jsp</result>
+    	</action>
+    	
+    	<action name="addHabilitation" class="com.sqli.echallenge.formation.web.admin.HabilitationAddAction">
+    		<result name="success" type="redirectAction">listHabilitations</result>
+    		<result name="input" type="redirectAction">listHabilitations</result>
+    		<result name="error" type="redirectAction">listHabilitations</result>
+    	</action>
+    	
+    	<action name="deleteHabilitation" class="com.sqli.echallenge.formation.web.admin.HabilitationDeleteAction">
+    		<result name="success" type="redirectAction">listHabilitations</result>
+    		<result name="input" type="redirectAction">listHabilitations</result>
+    		<result name="error" type="redirectAction">listHabilitations</result>
+    	</action>
+    	
+    	<action name="updateHabilitation" class="com.sqli.echallenge.formation.web.admin.HabilitationUpdateAction">
+    		<result name="success" type="redirectAction">listHabilitations</result>
+    		<result name="input" type="redirectAction">listHabilitations</result>
+    		<result name="error" type="redirectAction">listHabilitations</result>
+    	</action>
+    	<!-- End Gestion Habilitation -->
+    	
+    	<!-- Gestion HabilitationScore -->
+    	<action name="listHabilitationScores" class="com.sqli.echallenge.formation.web.admin.HabilitationScoreListAction">
+    		<result name="success">/pages/administrateur/habilitation_score_list.jsp</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	
+    	<action name="deleteHabilitationScore" class="com.sqli.echallenge.formation.web.admin.HabilitationScoreDeleteAction">
+    		<result name="success">/pages/administrateur/habilitation_score_list.jsp</result>
+    		<result name="input" type="redirectAction">listCollaborateurs</result>
+    		<result name="error" type="redirectAction">listCollaborateurs</result>
+    	</action>
+    	<!-- End Gestion HabilitationScore -->
+    	
+    </package>
+    
+     <package name="ajax" namespace="/ajax" extends="sqli_basic_package, json-default">
+     	 <action name="getCollaborateur" class="com.sqli.echallenge.formation.web.ajax.GetCollaborateurAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	 <action name="getHabilitation" class="com.sqli.echallenge.formation.web.ajax.GetHabilitationAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	 <action name="getHabilitationScore" class="com.sqli.echallenge.formation.web.ajax.GetHabilitationScoreAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	 <action name="deleteHabilitationScore" class="com.sqli.echallenge.formation.web.ajax.DeleteHabilitationScoreAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	 <action name="updateHabilitationScore" class="com.sqli.echallenge.formation.web.ajax.UpdateHabilitationScoreAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	  <action name="addHabilitationScore" class="com.sqli.echallenge.formation.web.ajax.AddHabilitationScoreAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     </package>
+</struts>
