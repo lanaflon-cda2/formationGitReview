@@ -43,15 +43,6 @@ public class CollaborateurUpdateAction extends SqliBasicAction {
 	
 	private Collaborateur collaborateur;
 	
-	
-	@RegexFieldValidator(
-		    type = ValidatorType.SIMPLE,
-		    fieldName = "telephone",         
-//		    regex = "^\\+?[0-9\\-]+\\*?$",
-		    
-		    regex = "^0?[5-6]{1}\\d{8}",
-		    message = "Please enter a valid phone number"
-		)
 	@Override
 	public String execute() throws Exception {
 		//After fields validation
@@ -133,6 +124,7 @@ public class CollaborateurUpdateAction extends SqliBasicAction {
 
 	@RequiredFieldValidator(shortCircuit=true)
 	@RequiredStringValidator(message="telephon", shortCircuit=true)
+	@RegexFieldValidator(type = ValidatorType.SIMPLE, regex = "^0?[5-6]{1}\\d{8}",message = "Please enter a valid phone number")
 	public String getTelephone() {
 		return telephone;
 	}
