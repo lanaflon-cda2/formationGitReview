@@ -134,6 +134,38 @@
     	</action>
     	<!-- End Gestion HabilitationScore -->
     	
+    	<!-- Gestion Utilisateur -->
+    	<action name="listUtilisateurs" class="com.sqli.echallenge.formation.web.admin.UtilisateurListAction">
+    		<result name="success">/pages/administrateur/utilisateur_list.jsp</result>
+    		<result name="input">/pages/administrateur/utilisateur_list.jsp</result>
+    		<result name="error">/pages/administrateur/utilisateur_list.jsp</result>
+    	</action>
+    	
+    	<action name="deleteUtilisateur" class="com.sqli.echallenge.formation.web.admin.UtilisateurDeleteAction">
+			<result name="success" type="redirectAction">listUtilisateurs</result>
+			<result name="input" type="redirectAction">listUtilisateurs</result>
+			<result name="error" type="redirectAction">listUtilisateurs</result>
+    	</action>
+    	
+    	<action name="addUtilisateur" class="com.sqli.echallenge.formation.web.admin.UtilisateurAddAction">
+			<result name="success" type="redirectAction">listUtilisateurs</result>
+			<result name="input" type="redirectAction">listUtilisateurs</result>
+			<result name="error" type="redirectAction">listUtilisateurs</result>
+    	</action>
+    	
+    	<action name="updateUtilisateur" class="com.sqli.echallenge.formation.web.admin.UtilisateurUpdateAction">
+			<result name="success" type="redirectAction">listUtilisateurs</result>
+			<result name="input" type="redirectAction">listUtilisateurs</result>
+			<result name="error" type="redirectAction">listUtilisateurs</result>
+    	</action>
+    	
+    	<action name="sendEmailToUtilisateur" class="com.sqli.echallenge.formation.web.admin.UtilisateurSendEmailAction">
+			<result name="success" type="redirectAction">listUtilisateurs</result>
+			<result name="input" type="redirectAction">listUtilisateurs</result>
+			<result name="error" type="redirectAction">listUtilisateurs</result>
+    	</action>
+    	<!-- End Gestion Utilisateur -->
+    	
     </package>
     
      <package name="ajax" namespace="/ajax" extends="sqli_basic_package, json-default">
@@ -158,6 +190,10 @@
      	 </action>
      	 
      	  <action name="addHabilitationScore" class="com.sqli.echallenge.formation.web.ajax.AddHabilitationScoreAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	  <action name="getUtilisateur" class="com.sqli.echallenge.formation.web.ajax.GetUtilisateurAjaxAction">
      	 	<result name="none" type="json" />
      	 </action>
      </package>
