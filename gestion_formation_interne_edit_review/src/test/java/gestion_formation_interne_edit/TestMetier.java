@@ -1,9 +1,8 @@
 package gestion_formation_interne_edit;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import javax.annotation.Resource;
+
+import junit.framework.Assert;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sqli.echallenge.formation.metier.UtilisateurMetier;
+import com.sqli.echallenge.formation.model.Utilisateur;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"/applicationContext.xml"})
@@ -22,24 +22,24 @@ public class TestMetier {
 	
 	@Test
 	public void myTest(){
-//		Utilisateur u = new Utilisateur();
-//		u.setNomUtilsateur("Fkr");
-//		u.setPrenomUtilisateur("Mouad");
-//		u.setEmailUtilisateur("mouad.fkr@gmail.com");
-//		
-//		try {
-//			utilisateurMetier.addUtilisateur(u);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			Assert.assertTrue(false);
-//		}
-//		
-//		try {
-//			Assert.assertTrue(utilisateurMetier.getAllUtilisateurs().size()>0);
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//			Assert.assertTrue(false);
-//		};
+		Utilisateur u = new Utilisateur();
+		u.setNomUtilsateur("Fkr");
+		u.setPrenomUtilisateur("Mouad");
+		u.setEmailUtilisateur("mouad.fkr@gmail.com");
+		
+		try {
+			utilisateurMetier.addUtilisateur(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		}
+		
+		try {
+			Assert.assertTrue(utilisateurMetier.getAllUtilisateurs().size()>0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			Assert.assertTrue(false);
+		};
 		
 		
 		
