@@ -20,6 +20,11 @@ public class ProfilMetierImpl implements ProfilMetier {
 	public Profil getProfil(Long idProfil) throws Exception {
 		return dao.getProfil(idProfil);
 	}
+	
+	public Profil getProfil(String nomProfil) throws Exception {
+		return dao.getProfil(nomProfil);
+	}
+	
 
 	public void addProfil(Profil profil) throws Exception {
 		dao.addProfil(profil);
@@ -44,7 +49,5 @@ public class ProfilMetierImpl implements ProfilMetier {
 	public void setDao(ProfilDao dao) {
 		this.dao = dao;
 	}
-	
-	
 
 }

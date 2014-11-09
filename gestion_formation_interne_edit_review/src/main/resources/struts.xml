@@ -166,6 +166,37 @@
     	</action>
     	<!-- End Gestion Utilisateur -->
     	
+    	<!-- Gestion Profil -->
+    	<action name="listProfils" class="com.sqli.echallenge.formation.web.admin.ProfilListAction">
+			<result name="success">/pages/administrateur/profil_list.jsp</result>
+    		<result name="input">/pages/administrateur/profil_list.jsp</result>
+    		<result name="error">/pages/administrateur/profil_list.jsp</result>
+    	</action>
+    	
+    	<action name="deleteProfil" class="com.sqli.echallenge.formation.web.admin.ProfilDeleteAction">
+			<result name="success" type="redirectAction">listProfils</result>
+    		<result name="input" type="redirectAction">listProfils</result>
+    		<result name="error" type="redirectAction">listProfils</result>
+    	</action>
+    	
+    	<action name="addProfil" class="com.sqli.echallenge.formation.web.admin.ProfilAddAction">
+			<result name="success" type="redirectAction">listProfils</result>
+    		<result name="input" type="redirectAction">listProfils</result>
+    		<result name="error" type="redirectAction">listProfils</result>
+    	</action>
+    	
+    	<action name="updateProfil" class="com.sqli.echallenge.formation.web.admin.ProfilUpdateAction">
+			<result name="success" type="redirectAction">listProfils</result>
+    		<result name="input" type="redirectAction">listProfils</result>
+    		<result name="error" type="redirectAction">listProfils</result>
+    	</action>
+    	
+    	<action name="listActions" class="com.sqli.echallenge.formation.web.admin.ProfilActionsListAction">
+			<result name="success">/pages/administrateur/action_list.jsp</result>
+    		<result name="input" type="redirectAction">listProfils</result>
+    		<result name="error" type="redirectAction">listProfils</result>
+    	</action>
+    	<!-- End Gestion Profil -->
     </package>
     
      <package name="ajax" namespace="/ajax" extends="sqli_basic_package, json-default">
@@ -194,6 +225,10 @@
      	 </action>
      	 
      	  <action name="getUtilisateur" class="com.sqli.echallenge.formation.web.ajax.GetUtilisateurAjaxAction">
+     	 	<result name="none" type="json" />
+     	 </action>
+     	 
+     	  <action name="getProfil" class="com.sqli.echallenge.formation.web.ajax.GetProfilAjaxAction">
      	 	<result name="none" type="json" />
      	 </action>
      </package>

@@ -22,6 +22,12 @@ public class ProfilDaoImpl implements ProfilDao {
 	public Profil getProfil(Long idProfil) throws Exception {
 		return entityManager.find(Profil.class, idProfil);
 	}
+	
+	public Profil getProfil(String nomProfil) throws Exception {
+		Query query = entityManager.createNamedQuery("from Profil where nomProfil=:nomProfil");
+		query.setParameter("nomProfil", nomProfil);
+		return (Profil) query.getSingleResult();
+	}
 
 	public void addProfil(Profil profil) throws Exception {
 		entityManager.persist(profil);
@@ -48,5 +54,4 @@ public class ProfilDaoImpl implements ProfilDao {
 	public void setEntityManager(EntityManager entityManager) {
 		this.entityManager = entityManager;
 	}
-
 }

@@ -32,20 +32,20 @@
 						var updateForm = document.getElementById("update_collaborateur");
 						
 						//set inputs value from jsonResponse
-						/* updateForm.idCollaborateur.value = jsonResponse.idCollaborateur;
-						updateForm.nom.value = jsonResponse.nom;
-						updateForm.prenom.value = jsonResponse.prenom;
-						updateForm.email.value = jsonResponse.email;
-						updateForm.telephone.value = jsonResponse.telephone;
-						updateForm.dateNaissance.value = jsonResponse.dateNaissance;
-						updateForm.adresse.value = jsonResponse.adresse; */
+// 						updateForm.idCollaborateur.value = jsonResponse.idCollaborateur;
+// 						updateForm.nom.value = jsonResponse.nom;
+// 						updateForm.prenom.value = jsonResponse.prenom;
+// 						updateForm.email.value = jsonResponse.email;
+// 						updateForm.telephone.value = jsonResponse.telephone;
+// 						updateForm.dateNaissance.value = jsonResponse.dateNaissance;
+// 						updateForm.adresse.value = jsonResponse.adresse;
 // 						document.getElementById("idCollaborateur").value = jsonResponse.idCollaborateur;
 						document.getElementById("inputLastName").value = jsonResponse.nom;
 						document.getElementById("inputFirstName").value = jsonResponse.prenom;
 						document.getElementById("inputEmail").value = jsonResponse.email;
-					/* 	document.getElementById("telephone").value = jsonResponse.telephone;
-						document.getElementById("dateNaissance").value = jsonResponse.dateNaissance;
-						document.getElementById("adresse").value = jsonResponse.adresse; */
+// 						document.getElementById("telephone").value = jsonResponse.telephone;
+// 						document.getElementById("dateNaissance").value = jsonResponse.dateNaissance;
+// 						document.getElementById("adresse").value = jsonResponse.adresse; 
 						
 						
 						
@@ -57,12 +57,12 @@
 								updateForm.sexe[i].selected=false;
 							}
 						}
-						
-						
-						$('#updateModal').modal('show');
 					}
 			  	});
-			};	
+				
+				$('#updateModal').modal('show');
+				
+			}
 			</script>
 		<!-- End Remplir Update Modal -->
 	</head>
@@ -92,8 +92,7 @@
 					<ul class="nav navbar-nav navbar-left member-nav">
 						<li><a href="index_administrateur.html"
 							class="active button-nav">Gestion des Collaborateurs</a></li>
-						<li><a href="#" class="button-nav">Gestion des
-								utilisateurs</a></li>
+						<li><a href="#" class="button-nav">Gestion des utilisateurs</a></li>
 						<li><a href="#" class="button-nav">Gestion des profils</a></li>
 					</ul>
 				</div>
@@ -284,14 +283,14 @@
 
 
 		<!-- Begin javascript for the dateTables -->
-		<script type="text/javascript" src='<s:url value="/lib/media/js/jquery.js"/>'></script>
+		<%-- <script type="text/javascript" src='<s:url value="/lib/media/js/jquery.js"/>'></script>
 	
 		<script type="text/javascript" src='<s:url value="/lib/media/js/jquery.dataTables.js"/>'></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#dataTable_Collaborateur').DataTable();
 			});
-		</script>
+		</script> --%>
 		<!-- End javascript for the dateTables -->
 		
 		<!-- bootstrap confirmation tool -->
