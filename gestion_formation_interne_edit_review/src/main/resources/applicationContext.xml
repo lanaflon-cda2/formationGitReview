@@ -78,6 +78,12 @@
 		<property name="dao" ref="habilitation_score_dao"></property>
 	</bean>
 	
+	<!-- ProfilAction -->	
+	<bean id="profil_action_dao" class="com.sqli.echallenge.formation.dao.ProfilActionDaoImpl"></bean>	
+	<bean id="profil_action_metier" class="com.sqli.echallenge.formation.metier.ProfilActionMetierImpl">
+		<property name="dao" ref="profil_action_dao"></property>
+	</bean>
+	
 	<!-- Hibernate JPA Config -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.jdbc.Driver"></property>

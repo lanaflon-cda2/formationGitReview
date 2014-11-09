@@ -23,7 +23,7 @@
 
 	<!-- Update Form -->
 	<s:form id="update_profil_actions" action="updateProfilActions" method="post">
-		<s:hidden name="idProfil" />
+		<s:hidden name="id" /><!-- idProfil -->
 		<br>
 		<s:iterator value="actionBeans">
 			<s:if test="checked==true">

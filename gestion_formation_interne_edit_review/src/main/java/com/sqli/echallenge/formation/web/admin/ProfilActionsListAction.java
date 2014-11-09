@@ -39,7 +39,7 @@ public class ProfilActionsListAction extends SqliBasicAction {
 			Profil profil = profilMetier.getProfil(id);
 			Set<Action> profilActions = profil.getActions();
 			
-			//
+			//Get actions of the aproppriate profil (profil de base)
 			Set<Action> actions;
 			if(profil.getRoleBase().equals(Profil.ROLE_ADMINISTRATEUR)){
 				actions = profilMetier.getProfil(Profil.ROLE_ADMINISTRATEUR).getActions();
