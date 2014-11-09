@@ -9,6 +9,7 @@ import com.sqli.echallenge.formation.model.Action;
  * @author Mouad
  *
  */
+
 public class ActionBean {
 	private Boolean checked;
 	private Action action;
