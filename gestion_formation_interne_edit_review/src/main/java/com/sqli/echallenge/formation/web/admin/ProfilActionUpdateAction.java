@@ -38,6 +38,7 @@ public class ProfilActionUpdateAction extends SqliBasicAction {
 			
 			//Remove all profil actions
 			
+			
 			//Add new Actions to profil
 			
 			setSessionActionMessageText(getText("profilActionUpdate.message.update.success"));
