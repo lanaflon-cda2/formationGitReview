@@ -7,36 +7,9 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 
-<script src="http://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-function jsonGetProfil(idProfil){
-	$.getJSON('<s:url action="getProfil" namespace="/ajax" />', {idProfil : idProfil}, function(jsonResponse) {
-		if(jsonResponse.status === "success"){
-			//get update Form			
-			var updateForm = document.getElementById("update_profil");
-			
-			//set inputs value from jsonResponse
-			updateForm.idProfil.value = jsonResponse.idProfil;
-			updateForm.nom.value = jsonResponse.nom;
-			updateForm.description.value = jsonResponse.description;
-			
-			//select role option
-			for(var i=0; i<updateForm.role.length; i++){
-				if(jsonResponse.role == updateForm.role[i].value){
-					updateForm.role[i].selected=true;
-				}else{
-					updateForm.role[i].selected=false;
-				}
-			}
-		}
-  	});
-}	
-</script>
 </head>
 <body>
 
-	<s:fielderror />
 	<!-- My version of Action Notifications -->
 	<s:if test="isSessionActionError()">
 		Error: <s:property value="sessionActionErrorText" />
@@ -52,11 +25,16 @@ function jsonGetProfil(idProfil){
 	<s:form id="update_profil_actions" action="updateProfilActions" method="post">
 		<s:hidden name="idProfil" />
 		<br>
-		<select multiple="multiple" name="actions">
-			<s:iterator value="actions">
-				<option value='<s:property value="idAction"/>'><s:property value="nomAction"/></option>
-			</s:iterator>
-		</select>
+		<s:iterator value="actionBeans">
+			<s:if test="checked==true">
+				<input type="checkbox" name="actions" value='<s:property value="action.idAction"/>' checked="checked"> <s:property value="action.nomAction" />
+			</s:if>
+			<s:else>
+				<input type="checkbox" name="actions" value='<s:property value="action.idAction"/>'> <s:property value="action.nomAction" />
+			</s:else>
+		</s:iterator>
+		
+		<s:submit value="Update" />
 	</s:form>
 	<!-- End Update Form -->
 

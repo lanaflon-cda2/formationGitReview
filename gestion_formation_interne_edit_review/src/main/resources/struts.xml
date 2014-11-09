@@ -196,6 +196,12 @@
     		<result name="input" type="redirectAction">listProfils</result>
     		<result name="error" type="redirectAction">listProfils</result>
     	</action>
+    	
+    	<action name="updateProfilActions" class="com.sqli.echallenge.formation.web.admin.ProfilActionUpdateAction">
+			<result name="success" type="redirectAction">listProfils</result>
+    		<result name="input" type="redirectAction">listProfils</result>
+    		<result name="error" type="redirectAction">listProfils</result>
+    	</action>
     	<!-- End Gestion Profil -->
     </package>
     

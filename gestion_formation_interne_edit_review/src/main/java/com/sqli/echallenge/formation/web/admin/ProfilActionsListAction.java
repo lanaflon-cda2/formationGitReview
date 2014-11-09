@@ -3,6 +3,8 @@
  */
 package com.sqli.echallenge.formation.web.admin;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import com.opensymphony.xwork2.validator.annotations.RequiredFieldValidator;
 import com.sqli.echallenge.formation.metier.ProfilMetier;
 import com.sqli.echallenge.formation.model.Action;
 import com.sqli.echallenge.formation.model.Profil;
+import com.sqli.echallenge.formation.model.bean.ActionBean;
 import com.sqli.echallenge.formation.web.SqliBasicAction;
 
 /**
@@ -27,17 +30,17 @@ public class ProfilActionsListAction extends SqliBasicAction {
 	public ProfilMetier profilMetier;
 	
 	private Long id;//idProfil
-	
-	private Set<Action> actions, profilActions;
+	private List<ActionBean> actionBeans = new ArrayList<ActionBean>();
 	
 	@Override
 	public String execute() throws Exception {
 		try {
 			//get Profil
 			Profil profil = profilMetier.getProfil(id);
-			profilActions = profil.getActions();
+			Set<Action> profilActions = profil.getActions();
 			
 			//
+			Set<Action> actions;
 			if(profil.getRoleBase().equals(Profil.ROLE_ADMINISTRATEUR)){
 				actions = profilMetier.getProfil(Profil.ROLE_ADMINISTRATEUR).getActions();
 			}
@@ -48,10 +51,26 @@ public class ProfilActionsListAction extends SqliBasicAction {
 				actions = profilMetier.getProfil(Profil.ROLE_FORMATEUR).getActions();
 			}
 			
+			for(Action a : actions){
+				ActionBean ab = new ActionBean();
+				ab.setAction(a);
+				
+				//Check if the action (a) is in the profil
+				if(isActionInProfil(profilActions ,a)){
+					ab.setChecked(true);
+				}else{
+					ab.setChecked(false);
+				}
+				
+				actionBeans.add(ab);
+			}
+			
 			return ActionSupport.SUCCESS;
 			
 		} catch (Exception e) {
 			setSessionActionErrorText(getText("profilActionList.error.loading.fail"));
+			
+			e.printStackTrace();
 			return ActionSupport.ERROR;
 		}
 	}
@@ -65,19 +84,21 @@ public class ProfilActionsListAction extends SqliBasicAction {
 		this.id = id;
 	}
 
-	public Set<Action> getActions() {
-		return actions;
+	public List<ActionBean> getActionBeans() {
+		return actionBeans;
 	}
 
-	public void setActions(Set<Action> actions) {
-		this.actions = actions;
+	public void setActionBeans(List<ActionBean> actionBeans) {
+		this.actionBeans = actionBeans;
 	}
-
-	public Set<Action> getProfilActions() {
-		return profilActions;
-	}
-
-	public void setProfilActions(Set<Action> profilActions) {
-		this.profilActions = profilActions;
+	
+	private boolean isActionInProfil(Set<Action> actions, Action action){
+		for(Action a : actions){
+			if(a.getIdAction().equals(action.getIdAction())){
+				return true;
+			}
+		}
+		
+		return false;
 	}
 }

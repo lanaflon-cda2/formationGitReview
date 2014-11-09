@@ -24,7 +24,7 @@ public class ProfilDaoImpl implements ProfilDao {
 	}
 	
 	public Profil getProfil(String nomProfil) throws Exception {
-		Query query = entityManager.createNamedQuery("from Profil where nomProfil=:nomProfil");
+		Query query = entityManager.createQuery("from Profil where nomProfil=:nomProfil");
 		query.setParameter("nomProfil", nomProfil);
 		return (Profil) query.getSingleResult();
 	}
