@@ -26,7 +26,6 @@ public class GetCollaborateurAjaxAction extends SqliBasicAction {
 	
 	private Long idCollaborateur;
 	private String status;
-	
 	private String nom;
 	private String prenom;
 	private String email;
