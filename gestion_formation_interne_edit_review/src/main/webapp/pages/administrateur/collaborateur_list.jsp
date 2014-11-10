@@ -183,7 +183,6 @@
 			  	});
 				
 				$('#updateModal').modal('show');
-				
 			}
 			</script>
 		<!-- End Remplir Update Modal -->
