@@ -186,7 +186,6 @@
 			}
 			</script>
 		<!-- End Remplir Update Modal -->
-		
 
 		<script type="text/javascript" src='<s:url value="/lib/dist/js/bootstrap.js"/>'></script>
 
