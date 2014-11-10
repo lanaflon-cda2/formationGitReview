@@ -3,7 +3,7 @@
  */
 package com.sqli.echallenge.formation.web.ajax;
 
-import java.util.Date;
+import java.text.SimpleDateFormat;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,7 +30,7 @@ public class GetCollaborateurAjaxAction extends SqliBasicAction {
 	private String nom;
 	private String prenom;
 	private String email;
-	private Date dateNaissance;
+	private String dateNaissance;
 	private String telephone;
 	private String adresse;
 	private boolean sexe;
@@ -42,7 +42,7 @@ public class GetCollaborateurAjaxAction extends SqliBasicAction {
 			nom = collaborateur.getNomCollaborateur();
 			prenom = collaborateur.getPrenomCollaborateur();
 			email = collaborateur.getEmailCollaborateur();
-			dateNaissance = collaborateur.getDateNaissanceCollaborateur();
+			dateNaissance = new SimpleDateFormat("yyyy-MM-dd").format(collaborateur.getDateNaissanceCollaborateur());
 			telephone = collaborateur.getTelephoneCollaborateur();
 			adresse = collaborateur.getAdresseCollaborateur();
 			sexe = collaborateur.isSexeCollaborateur();
@@ -104,11 +104,11 @@ public class GetCollaborateurAjaxAction extends SqliBasicAction {
 		this.telephone = telephone;
 	}
 
-	public Date getDateNaissance() {
+	public String getDateNaissance() {
 		return dateNaissance;
 	}
 
-	public void setDateNaissance(Date dateNaissance) {
+	public void setDateNaissance(String dateNaissance) {
 		this.dateNaissance = dateNaissance;
 	}
 
