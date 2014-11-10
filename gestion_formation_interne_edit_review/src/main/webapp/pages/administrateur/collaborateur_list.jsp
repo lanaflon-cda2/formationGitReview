@@ -1,70 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
-<!-- URL to the root -->
 
 <!DOCTYPE html>
 <html>
 	<head>
+	
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Maquette</title>
 		<link rel="stylesheet" href='<s:url value="/css/style.css"/>' />
 		<link rel="stylesheet" href='<s:url value="/lib/dist/css/bootstrap.css"/>' />
 		
-		
 		<!-- Begin CSS for the dateTables -->
 		<link rel="stylesheet" href='<s:url value="/lib/media/css/jquery.dataTables.css"/>' />
 		<!-- End CSS for the dateTables -->
 	
-	
-		<!-- Remplir Update Modal -->
-			<script src="http://code.jquery.com/jquery-2.1.0.min.js" type="text/javascript"></script>
-			<script type="text/javascript">
-			
-			
-			
-			function jsonGetCollaborateur(idCollaborateur){
-				//make ajax request to /ajax/getCollaborateur?idCollaborateur=x
-				$.getJSON('<s:url action="getCollaborateur" namespace="/ajax" />', {idCollaborateur : idCollaborateur}, function(jsonResponse) {
-					//if satuts == "success" , do
-					if(jsonResponse.status === "success"){
-						//get update Form			
-						var updateForm = document.getElementById("update_collaborateur");
-						
-						//set inputs value from jsonResponse
-// 						updateForm.idCollaborateur.value = jsonResponse.idCollaborateur;
-// 						updateForm.nom.value = jsonResponse.nom;
-// 						updateForm.prenom.value = jsonResponse.prenom;
-// 						updateForm.email.value = jsonResponse.email;
-// 						updateForm.telephone.value = jsonResponse.telephone;
-// 						updateForm.dateNaissance.value = jsonResponse.dateNaissance;
-// 						updateForm.adresse.value = jsonResponse.adresse;
-// 						document.getElementById("idCollaborateur").value = jsonResponse.idCollaborateur;
-						document.getElementById("inputLastName").value = jsonResponse.nom;
-						document.getElementById("inputFirstName").value = jsonResponse.prenom;
-						document.getElementById("inputEmail").value = jsonResponse.email;
-// 						document.getElementById("telephone").value = jsonResponse.telephone;
-// 						document.getElementById("dateNaissance").value = jsonResponse.dateNaissance;
-// 						document.getElementById("adresse").value = jsonResponse.adresse; 
-						
-						
-						
-						//select sexe option
-						for(var i=0; i<updateForm.sexe.length; i++){
-							if(jsonResponse.sexe == updateForm.sexe[i].value){
-								updateForm.sexe[i].selected=true;
-							}else{
-								updateForm.sexe[i].selected=false;
-							}
-						}
-					}
-			  	});
-				
-				$('#updateModal').modal('show');
-				
-			}
-			</script>
-		<!-- End Remplir Update Modal -->
+		<!-- Begin CSS for time picker -->
+		<link rel="stylesheet" type="text/css" href='<s:url value="/lib/datetimepicker-master/jquery.datetimepicker.css"/>' />
+		<!-- End CSS for time picker -->
+		
 	</head>
 	<body class="main">
 	
@@ -130,8 +84,7 @@
 	
 		<div class="container main-table">
 			<div class="col-lg-12">
-				<table id="dataTable_Collaborateur" class="display dataTable"
-					width="100%" cellspacing="0">
+				<table id="dataTable_Collaborateur" class="display dataTable" >
 					<thead>
 						<tr>
 							<th>Nom & Prénom</th>
@@ -190,122 +143,84 @@
 		</div>
 		
 		
-		<!-- Update Modal Form -->
+		<!-- Update Collaborateur Modal Form -->
 		
-		<div class="modal fade" id="updateModal" tabindex="-1" role="dialog"
-			aria-labelledby="myModalLabel" aria-hidden="true">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">
-							<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
-						</button>
-						<h4 class="modal-title" id="myModalLabel">Modification</h4>
-					</div>
-					
-					<form id="update_collaborateur" action="updateCollaborateur" method="post">
-					<div class="modal-body">
-						<div class="col-lg-12 image">
-							<img src="images/members/avatar.png" />
-						</div>
-					
-					<div class="form-group">
-						<label for="inputLastName" class="col-lg-4 control-label">Nom</label>
-						<div class="col-lg-8">
-							<input autocomplete="off" name="nom"
-								class="form-control" id="inputLastName" placeholder="Nom"
-								type="text">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="inputFirstName" class="col-lg-4 control-label">Prenom</label>
-						<div class="col-lg-8">
-							<input autocomplete="off" name="prenom"
-								class="form-control" id="inputFirstName" placeholder="Prenom"
-								type="text">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="inputEmail" class="col-lg-4 control-label">Email</label>
-						<div class="col-lg-8">
-							<input autocomplete="off" name="email"
-								class="form-control" id="inputEmail" placeholder="Email"
-								type="text">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="inputDateNaissance" class="col-lg-4 control-label">Date de Naissance</label>
-						<div class="col-lg-8">
-							<input autocomplete="off" name="prenom"
-								class="form-control" id="inputDateNaissance" placeholder="dateNaissance"
-								type="text">
-						</div>
-					</div>
-					
-					<div class="form-group">
-						<label for="inputPassword" class="col-lg-4 control-label">Mot de passe</label>
-						<div class="col-lg-8">
-							<input autocomplete="off"
-								class="form-control" id="inputPassword" placeholder="Mot de passe"
-								type="password">
-							<div class="checkbox">
-								<label> <input type="checkbox"> Checkbox
-								</label>
-							</div>
-						</div>
-					</div>
-
-
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
-					<button type="button" class="btn btn-primary">Mettre à jour</button>
-				</div>
-				
-				</form>
-			</div>
-			</div>
-		</div>
+		<s:include value="include/updateCollaborateurModal.jsp"></s:include>
 		
-		
-		<!-- End Update Modal Form -->
+		<!-- End Update Collaborateur Modal Form -->
 		
 		
 	
 		<!-- Modal -->
 		
-		<script
-			src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script type="text/javascript" src='<s:url value="/lib/dist/js/bootstrap.js"/>'></script>
-<%-- 		<script type="text/javascript" src='<s:url value="/lib/dist/js/bootstrap_modal.js"/>'></script> --%>
+		<!-- Remplir Update Modal -->
+			<script src='<s:url value="/js/jquery-2.1.1.min.js"/>' type="text/javascript"></script>
+			<script type="text/javascript">
+			function jsonGetCollaborateur(idCollaborateur){
+				//make ajax request to /ajax/getCollaborateur?idCollaborateur=x
+				$.getJSON('<s:url action="getCollaborateur" namespace="/ajax" />', {idCollaborateur : idCollaborateur}, function(jsonResponse) {
+					//if satuts == "success" , do
+					if(jsonResponse.status === "success"){
+						//get update Form			
+						var updateForm = document.getElementById("update_collaborateur");
+						
+						//set inputs value from jsonResponse
+						document.getElementById("idCollaborateur").value = jsonResponse.idCollaborateur;
+						document.getElementById("inputLastName").value = jsonResponse.nom;
+						document.getElementById("inputFirstName").value = jsonResponse.prenom;
+						document.getElementById("inputEmail").value = jsonResponse.email;
+						document.getElementById("inputTelephone").value = jsonResponse.telephone;
+						document.getElementById("inputDateNaissance").value = jsonResponse.dateNaissance;
+						document.getElementById("inputAdress").value = jsonResponse.adresse; 
+						
+						//check sexe option
+						if(jsonResponse.sexe == "true"){
+							document.getElementById("optionHomme").checked = true;
+						}else{
+							document.getElementById("optionFemme").checked = true;
+						}
+					}
+			  	});
+				
+				$('#updateModal').modal('show');
+				
+			}
+			</script>
+		<!-- End Remplir Update Modal -->
+		
 
+		<script type="text/javascript" src='<s:url value="/lib/dist/js/bootstrap.js"/>'></script>
 
 		<!-- Begin javascript for the dateTables -->
-		<%-- <script type="text/javascript" src='<s:url value="/lib/media/js/jquery.js"/>'></script>
-	
 		<script type="text/javascript" src='<s:url value="/lib/media/js/jquery.dataTables.js"/>'></script>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$('#dataTable_Collaborateur').DataTable();
 			});
-		</script> --%>
+		</script> 
 		<!-- End javascript for the dateTables -->
 		
 		<!-- bootstrap confirmation tool -->
-	
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/bootstrap-transition.js"/>'></script>
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/bootstrap-tooltip.js"/>'></script>
-	
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/holder.js"/>'></script>
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/prettify.js"/>'></script>
-	
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/application.js"/>'></script>
-	
 			<script src='<s:url value="/lib/BootstrapConfirmation_files/bootstrap-confirmation.js"/>'></script>
-	
 		<!-- end bootstrap confirmation tool -->
+		
+		<!-- Begin javascript For time picker -->
+			<script src='<s:url value="/lib/datetimepicker-master/jquery.datetimepicker.js"/>'></script>
+			<script>
+			$('#inputDateNaissance').datetimepicker({
+			  format:'Y-m-d', 
+			        lang:'fr',
+			        minDate:'1900/01/01',
+			        maxDate:'0',
+			        timepicker : false
+			});
+			</script>
+		<!-- End javascript  for time picker -->
 	
 	</body>
 </html>
